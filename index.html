@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+
+        function getComputerChoice() {
+            let randInt = Math.floor(Math.random() * 3 + 1);
+            
+            if (randInt == 1) {
+                return "Rock";
+            }
+            else if (randInt == 2) {
+                return "Paper";
+            }
+            else {
+                return "Scissors";
+            }
+        }
+
+        function getHumanChoice() {
+            return prompt("Please Enter 'Rock', 'Paper', or 'Scissors': ");
+        }
+
+        function playRound() {
+            let tempHuman = getHumanChoice();
+            let tempComputer = getComputerChoice();
+
+            tempHuman = tempHuman.toUpperCase();
+            tempComputer = tempComputer.toUpperCase();
+
+            console.log("You chose " + tempHuman + ".");
+            console.log("Computer chose " + tempComputer + ".");
+
+            if (tempHuman == "ROCK" && tempComputer == "PAPER") {
+                computerScore += 1;
+            }
+            if (tempHuman == "ROCK" && tempComputer == "SCISSORS") {
+                humanScore += 1;
+            }
+            if (tempHuman == "PAPER" && tempComputer == "ROCK") {
+                humanScore += 1;
+            }
+            if (tempHuman == "PAPER" && tempComputer == "SCISSORS") {
+                computerScore += 1;
+            }
+            if (tempHuman == "SCISSORS" && tempComputer == "ROCK") {
+                computerScore += 1;
+            }
+            if (tempHuman == "SCISSORS" && tempComputer == "PAPER") {
+                humanScore += 1;
+            }
+        }
+        
+        while (humanScore < 3 && computerScore < 3) {
+            playRound();
+            console.log("Human: " + humanScore + " Computer: " + computerScore);
+        }
+        if (humanScore > computerScore){
+            console.log("Congrats on winning!");
+        }
+        else {
+            console.log("Better luck next time!");
+        }
+    </script>
+</body>
+</html>
