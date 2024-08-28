@@ -1,0 +1,38 @@
+body {
+    background-color: #D5FFFF;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10em;
+    gap: 5em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#top-text {
+    font-size: 48px;
+}
+
+#scores {
+    display: flex;
+    flex-direction: row;
+    gap: 8em;
+}
+
+#buttons {
+    display: flex;
+    gap: 5em;
+}
+
+#icon {
+    height: 200px;
+    width: 200px;
+    object-fit: fill;
+}
+
+#icon:hover {
+    opacity: 50%;
+}

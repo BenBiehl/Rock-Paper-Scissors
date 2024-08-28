@@ -4,8 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="main-container">
+        <h1 id="top-text">Choose your move to start!</h1>
+        <div id="buttons">
+            <a id="rock"><img id="icon" src="./images/rock.png"></img></a>
+            <a id="paper"><img id="icon" src="./images/paper.png"></img></a>
+            <a id="scissors"><img id="icon" src="./images/scissors.png"></img></a>
+        </div>
+        <div id="scores">
+            <h1 id="you">You: 0</h1>
+            <h1 id="computer">Computer: 0</h1>
+        </div>
+    </div>
     <script>
         let humanScore = 0;
         let computerScore = 0;
@@ -14,29 +27,34 @@
             let randInt = Math.floor(Math.random() * 3 + 1);
             
             if (randInt == 1) {
-                return "Rock";
+                return "ROCK";
             }
             else if (randInt == 2) {
-                return "Paper";
+                return "PAPER";
             }
             else {
-                return "Scissors";
+                return "SCISSORS";
             }
         }
 
-        function getHumanChoice() {
-            return prompt("Please Enter 'Rock', 'Paper', or 'Scissors': ");
+        function checkIfWin() {
+            if (humanScore == 5){
+                document.getElementById("top-text").textContent = "You won, congratulations!";
+                humanScore = 0;
+                computerScore = 0;
+            }
+            else if (computerScore == 5) {
+                document.getElementById("top-text").textContent = "You lost, better luck next time!";
+                humanScore = 0;
+                computerScore = 0;
+            }
         }
 
-        function playRound() {
-            let tempHuman = getHumanChoice();
+        function playRound(choice) {
+            let tempHuman = choice;
             let tempComputer = getComputerChoice();
 
-            tempHuman = tempHuman.toUpperCase();
-            tempComputer = tempComputer.toUpperCase();
-
-            console.log("You chose " + tempHuman + ".");
-            console.log("Computer chose " + tempComputer + ".");
+            document.getElementById("top-text").textContent = "You chose " + tempHuman + ", Computer chose " + tempComputer;
 
             if (tempHuman == "ROCK" && tempComputer == "PAPER") {
                 computerScore += 1;
@@ -56,18 +74,23 @@
             if (tempHuman == "SCISSORS" && tempComputer == "PAPER") {
                 humanScore += 1;
             }
+            document.getElementById("you").textContent = "You: " + humanScore;
+            document.getElementById("computer").textContent = "Computer: " + computerScore;
+
+            checkIfWin();
         }
-        
-        while (humanScore < 3 && computerScore < 3) {
-            playRound();
-            console.log("Human: " + humanScore + " Computer: " + computerScore);
-        }
-        if (humanScore > computerScore){
-            console.log("Congrats on winning!");
-        }
-        else {
-            console.log("Better luck next time!");
-        }
+
+        document.getElementById("rock").addEventListener("click", () => {
+            playRound("ROCK");
+        });
+
+        document.getElementById("paper").addEventListener("click", () => {
+            playRound("PAPER");
+        });
+
+        document.getElementById("scissors").addEventListener("click", () => {
+            playRound("SCISSORS");
+        });
     </script>
 </body>
 </html>
